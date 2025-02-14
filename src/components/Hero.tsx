@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="flex flex-row items-center justify-center">
+    <div className="flex flex-col-reverse md:flex-row items-center justify-center">
       <div className="w-[500px]">
         <h1 className="font-black text-[45px]">
           Earn on 2pay by performing simple tasks.
