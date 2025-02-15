@@ -3,27 +3,32 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
+:root {
+  --green: #29cd9c;
+  --gray-05: #f2f2f2;
+  --black: black;
+  --blue-dark: #035670;
+  --white: white;
+  --tan-light: #faf2e3;
+  --gray-01: #f8f8f8;
+  --gray-50: grey;
+  --gray-10: #e6e6e6;
+  --tan: #f5e6c7;
+  --blue: #3da9d8;
+  --blue-light: #a0d3f0;
+  --gray-80: #333;
+  --gray-20: #ccc;
+}
+
 * {
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  /* color: var(--foreground);
-  background: var(--background); */
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
+  color: var(--black);
   box-sizing: border-box;
   font-optical-sizing: auto;
   font-family: "Quicksand", "Work Sans", serif;
+  background-color: var(--white);
 }
