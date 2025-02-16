@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+const links = ["Home", "Blog", "Contact", "Login", "Register"];
+const deskLinks = ["How To Start", "Blog", "Busniess"];
+
 export default function Header() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-  const links = ["Home", "Blog", "Contact", "Login", "Register"];
   return (
     <header className="p-5">
       <div className="mx-auto w-[100%] md:w-[90%] flex flex-row items-center justify-between">
@@ -17,11 +19,23 @@ export default function Header() {
           </h1>
         </Link>
 
+        <nav className="hidden lg:block">
+          {deskLinks.map((l) => (
+            <Link
+              className="font-black p-3 hover:text-[var(--green)]"
+              key={l}
+              href={`/${l}`}
+            >
+              {l}
+            </Link>
+          ))}
+        </nav>
+
         <div
           onClick={() => {
             setMenuIsOpen(!menuIsOpen);
           }}
-          className="md:hidden absolute right-5"
+          className="sm:hidden absolute right-5"
         >
           <Image src="/menu-icon.png" alt="menu icon" width={30} height={30} />
         </div>
@@ -44,17 +58,18 @@ export default function Header() {
         <div
           className={`${
             !menuIsOpen && "hidden"
-          } absolute top-20 z-10 right-5 bg-[var(--white)] rounded shadow-lg border-b-2 border-[var(--green)]`}
+          } absolute top-20 z-10 right-5 bg-[var(--white)] rounded shadow-lg border-b-2 border-[var(--green)] transition-transform scale-100 ease-in-out`}
         >
           <ul className="text-center">
             {links.map((link) => (
-              <Link
-                className="w-[200px] p-2 block hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-                key={link}
-                href={`/${link}`}
-              >
-                {link}
-              </Link>
+              <li key={link} className="w-[200px]">
+                <Link
+                  className="p-3 block hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
+                  href={`/${link}`}
+                >
+                  {link}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
