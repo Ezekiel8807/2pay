@@ -64,8 +64,11 @@ export default function Header() {
             {links.map((link) => (
               <li key={link} className="w-[200px]">
                 <Link
+                  onClick={() => {
+                    setMenuIsOpen(false);
+                  }}
                   className="p-3 block hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-                  href={`/${link}`}
+                  href={`/${link.toLowerCase()}`}
                 >
                   {link}
                 </Link>
