@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "./Button";
 
 type AuthFormProbs = {
@@ -17,7 +18,7 @@ export default function AuthForm({
         <div className="flex items-center justify-between">
           <h1 className="font-black text-3xl text-[var(--green)]">{title}</h1>
           <span className="w-[20px] h-[20px] p-1 cursor-pointer font-black text-[var(--white)] text-[10px] bg-[var(--green)] text-center rounded-full">
-            X
+            <Link href="/">X</Link>
           </span>
         </div>
         <form action="">
