@@ -68,7 +68,7 @@ export default function Header() {
                     setMenuIsOpen(false);
                   }}
                   className="p-3 block hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-                  href={`/${link.toLowerCase()}`}
+                  href={`/${link == "Home" ? "/" : link.toLowerCase()}`}
                 >
                   {link}
                 </Link>
