@@ -5,6 +5,7 @@ type AuthFormProbs = {
   children: React.ReactNode;
   title: string;
   formBtnValue: string;
+  formAction?: () => void;
 };
 
 export default function AuthForm({

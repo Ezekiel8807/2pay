@@ -1,4 +1,5 @@
 import AuthForm from "@/components/AuthForm";
+import Link from "next/link";
 
 export default function Register() {
   return (
@@ -22,6 +23,11 @@ export default function Register() {
           name="password"
           placeholder="Password"
         />
+        <div className="flex items-center justify-between -mt-3 mb-3">
+          <Link className="text-[12px] cursor-pointer" href="/login">
+            Back to login
+          </Link>
+        </div>
       </AuthForm>
     </>
   );
