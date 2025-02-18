@@ -49,7 +49,70 @@ export default function Dashboard() {
             <h1 className="font-black text-[30px] mt-5">Tasks</h1>
             <p>Earn real cash for completing task.</p>
 
-            <div className="bg-white p-5 my-5"></div>
+            <div className="bg-white h-[250px] p-5 my-5 rounded">
+              <div className="mx-auto grid grid-flow-col gap-5 overflow-x-scroll no-scrollbar">
+                <div className="relative w-[200px] h-[200px] bg-[var(--white)] shadow-md rounded-lg">
+                  <div className="flex justify-end p-2">
+                    <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
+                      FA
+                    </div>
+                    <div className="absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--green)] rounded-lg">
+                      #500
+                    </div>
+                  </div>
+                </div>
+                <div className="relative w-[200px] h-[200px] bg-[var(--green)] rounded-lg">
+                  <div className="flex justify-end p-2">
+                    <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
+                      FA
+                    </div>
+                    <div className="absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--white)] rounded-lg">
+                      #500
+                    </div>
+                  </div>
+                </div>
+                <div className="relative w-[200px] h-[200px] bg-[var(--green)] rounded-lg">
+                  <div className="flex justify-end p-2">
+                    <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
+                      FA
+                    </div>
+                    <div className="absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--white)] rounded-lg">
+                      #500
+                    </div>
+                  </div>
+                </div>
+                <div className="relative w-[200px] h-[200px] bg-[var(--green)] rounded-lg">
+                  <div className="flex justify-end p-2">
+                    <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
+                      FA
+                    </div>
+                    <div className="absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--white)] rounded-lg">
+                      #500
+                    </div>
+                  </div>
+                </div>
+                <div className="relative w-[200px] h-[200px] bg-[var(--green)] rounded-lg">
+                  <div className="flex justify-end p-2">
+                    <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
+                      FA
+                    </div>
+                    <div className="absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--white)] rounded-lg">
+                      #500
+                    </div>
+                  </div>
+                </div>
+                <div className="relative w-[200px] h-[200px] bg-[var(--green)] rounded-lg">
+                  <div className="flex justify-end p-2">
+                    <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
+                      FA
+                    </div>
+                    <div className="absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--white)] rounded-lg">
+                      #500
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

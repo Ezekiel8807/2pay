@@ -1,6 +1,14 @@
+"use client";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Hero() {
+  const navigate = useRouter();
+
+  const handleClick = (): void => {
+    navigate.push("/dashboard");
+  };
+
   return (
     <div className="mx-auto flex flex-col-reverse md:flex-row items-center justify-center p-5 md:p-10">
       <div className="relative md:w-[40%]">
@@ -12,7 +20,10 @@ export default function Hero() {
           posting, liking, commenting and so on.
         </p>
 
-        <button className="w-[100%] md:w-[200px] font-bold bg-[var(--green)] p-3 my-5 text-white rounded-full">
+        <button
+          onClick={handleClick}
+          className="w-[100%] md:w-[200px] font-bold bg-[var(--green)] p-3 my-5 text-white rounded-full"
+        >
           Start earning now!!!
         </button>
 

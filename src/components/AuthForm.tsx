@@ -12,6 +12,7 @@ export default function AuthForm({
   children,
   title,
   formBtnValue,
+  formAction,
 }: AuthFormProbs) {
   return (
     <div className="fixed inset-0 bg-opacity-1 backdrop-blur-sm flex items-center justify-center hiden">
@@ -22,10 +23,13 @@ export default function AuthForm({
             <Link href="/">X</Link>
           </span>
         </div>
-        <form action="">
+        <form method="post">
           {children}
 
-          <Button btnStyle="font-black float-right px-10 py-2 bg-[var(--green)] text-[var(--white)] rounded">
+          <Button
+            btnAction={formAction}
+            btnStyle="font-black float-right px-10 py-2 bg-[var(--green)] text-[var(--white)] rounded"
+          >
             {formBtnValue}
           </Button>
         </form>

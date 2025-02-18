@@ -1,10 +1,24 @@
-import AuthForm from "@/components/AuthForm";
+"use client";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// components
+import AuthForm from "@/components/AuthForm";
+
 export default function Register() {
+  const navigate = useRouter();
+
+  //register function
+  const handleRegistration = () => {
+    navigate.push("/login");
+  };
   return (
     <>
-      <AuthForm title="Register" formBtnValue="Register">
+      <AuthForm
+        title="Register"
+        formBtnValue="Register"
+        formAction={handleRegistration}
+      >
         <input
           className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
           type="text"

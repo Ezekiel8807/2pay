@@ -1,12 +1,21 @@
+"use client";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 // components
 import AuthForm from "@/components/AuthForm";
 
 export default function Login() {
+  const navigate = useRouter();
+
+  //Login function
+  const isLogIn = () => {
+    navigate.push("/dashboard");
+  };
+
   return (
     <>
-      <AuthForm title="Login" formBtnValue="Login">
+      <AuthForm title="Login" formBtnValue="Login" formAction={isLogIn}>
         <input
           className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
           type="text"
@@ -22,10 +31,10 @@ export default function Login() {
 
         <div className="flex items-center justify-between -mt-3 mb-3">
           <Link className="text-[12px] cursor-pointer" href="/register">
-            Register now!!!{" "}
+            Register now!!!
           </Link>
           <Link className="text-[12px] cursor-pointer" href="/forget">
-            Retrive account?{" "}
+            Retrive account?
           </Link>
         </div>
       </AuthForm>

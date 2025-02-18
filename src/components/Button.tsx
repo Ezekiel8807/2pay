@@ -1,20 +1,12 @@
-"use client";
-import { useRouter } from "next/navigation";
-
 type ButtonProbs = {
   children: React.ReactNode;
-  btnStyle: string;
+  btnStyle?: string;
+  btnAction?: () => void;
 };
 
-export default function Button({ children, btnStyle }: ButtonProbs) {
-  const navigate = useRouter();
-
-  const isLogIn = () => {
-    navigate.push("/dashboard");
-  };
-
+export default function Button({ children, btnStyle, btnAction }: ButtonProbs) {
   return (
-    <button onClick={isLogIn} className={btnStyle}>
+    <button onClick={btnAction} className={btnStyle}>
       {children}
     </button>
   );
