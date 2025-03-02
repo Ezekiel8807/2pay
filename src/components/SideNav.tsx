@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 // import { redirect } from "next/navigation";
 
@@ -17,10 +18,17 @@ export default function SideNav({ token }: { token: any }) {
 
   return (
     <div className="w-[250px] bg-[var(--green)] p-5 my-5 md:my-10 rounded mx-auto shadow-md">
-      <div className="w-[100px] h-[100px] bg-[var(--blue-dark)] shadow-md rounded-full m-auto"></div>
+      <div className="w-[100px] h-[100px] bg-[var(--blue-dark)] shadow-md rounded-full m-auto">
+        <Image
+          src="/icons/user-139.svg"
+          width={100}
+          height={100}
+          alt="Sde nav pro-photo"
+        />
+      </div>
       <div className="text-center">
         <span className="font-black mt-2 block text-[var(--white)]">
-          Type: Brass
+          Rank: Brass
         </span>
         <h1 className="font-black text-[30px]">{username}</h1>
       </div>

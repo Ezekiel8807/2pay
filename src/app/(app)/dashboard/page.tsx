@@ -4,7 +4,7 @@ import { connectDB } from "../../../../lib/mongodb";
 
 //componentes
 import AcctBalCom from "@/components/AcctBalCom";
-import Tasks from "@/components/Tasks";
+import Tasks from "@/components/layout/Tasks";
 
 export default async function Dashboard() {
   const token = await getToken();
