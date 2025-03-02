@@ -1,73 +1,112 @@
 "use client";
 import Link from "next/link";
-import { useActionState } from "react";
-import { FormState } from "@/actions/registerAction";
-import { handleRegistration } from "@/actions/registerAction";
+import { useState } from "react";
 
 // components
 import AuthForm from "@/components/AuthForm";
 import Button from "@/components/Button";
-import FormError from "@/components/FormError";
+import FormError from "@/components/errorCom/Error";
+import { redirect } from "next/navigation";
 
 export default function Register() {
-  //initial registration state
-  const initialFormState: FormState = {
-    errors: {},
-    newUser: {},
-  };
+  const [err, setErr] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [compass, setCompass] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [state, formAction, isLoading] = useActionState(
-    handleRegistration,
-    initialFormState
-  );
+  const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (!username) {
+      setIsLoading(false);
+      return setErr("Enter your username");
+    }
+
+    if (!email) {
+      setIsLoading(false);
+      return setErr("Enter your email");
+    }
+
+    if (!password) {
+      setIsLoading(false);
+      return setErr("Enter your password");
+    }
+
+    if (password != compass) {
+      setIsLoading(false);
+      return setErr("Password don't match");
+    }
+
+    const res = await fetch("/api/users", {
+      method: "POST",
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setIsLoading(false);
+      return setErr(data.err);
+    }
+
+    setIsLoading(false);
+    redirect("/login");
+    //global success message
+  };
 
   return (
     <>
       <AuthForm title="Register">
-        <form action={formAction}>
+        <form onSubmit={handleRegistration}>
           <input
             className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
             type="text"
             name="username"
-            defaultValue={state.newUser.username}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setUsername(e.target.value);
+            }}
+            defaultValue={username}
             placeholder="Username"
           />
-          {state.errors.username && (
-            <FormError>{state.errors.username}</FormError>
-          )}
 
           <input
-            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
+            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full mb-5"
             type="email"
             name="email"
-            defaultValue={state.newUser.email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(e.target.value);
+            }}
+            defaultValue={email}
             placeholder="Email"
           />
-          {state.errors.email && <FormError>{state.errors.email}</FormError>}
 
           <input
-            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
+            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full mb-5"
             type="password"
             name="password"
-            defaultValue={state.newUser.password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.target.value);
+            }}
+            defaultValue={password}
             placeholder="Password"
           />
-          {state.errors.password && (
-            <FormError>{state.errors.password}</FormError>
-          )}
 
           <input
-            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
+            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full"
             type="password"
             name="compass"
-            defaultValue={state.newUser.compass}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setCompass(e.target.value);
+            }}
+            defaultValue={compass}
             placeholder="Password Again"
           />
-          {state.errors.compass && (
-            <FormError>{state.errors.compass}</FormError>
-          )}
+          {err && <FormError>{err}</FormError>}
 
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between my-2">
             <Link className="text-[12px] cursor-pointer" href="/login">
               Back to login
             </Link>

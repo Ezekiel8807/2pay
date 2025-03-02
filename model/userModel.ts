@@ -1,24 +1,24 @@
 import mongoose, { models } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  firstname: String,
-  lastname: String,
-  username: { type: String, required: true },
+  firstname: { type: String, require: "" },
+  lastname: { type: String, require: "" },
+  username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   rank: { type: Number, default: 1 },
-  type: { type: String, default: "user" },
+  isAdmin: { type: Boolean, default: false },
   task: [
     {
-      name: String,
+      name: { type: String, require: "" },
       level: { type: Number, default: 1 },
-      price: Number,
-      state: String,
+      price: { type: Number, default: 0 },
+      state: { type: String, require: "" },
       media: {
-        type: String,
-        content: String,
+        type: { type: String, require: "" },
+        content: { type: String, require: "" },
       },
       isPaid: { type: Boolean, default: false },
-      instruction: String,
+      instruction: { type: String, require: "" },
     },
   ],
   missedTask: { type: Number, default: 0 },
@@ -26,12 +26,12 @@ const UserSchema = new mongoose.Schema({
   account: {
     balance: { type: Number, default: 0 },
     withdrawer: {
-      bankName: String,
-      bankAcctNo: Number,
+      bankName: { type: String, require: "" },
+      bankAcctNo: { type: Number, default: 123456890 },
     },
   },
   password: { type: String, require: true },
 });
 
-const User = models.User || mongoose.model("User", UserSchema);
+const User = models?.User || mongoose.model("User", UserSchema);
 export default User;

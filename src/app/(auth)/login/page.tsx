@@ -1,51 +1,78 @@
 "use client";
 import Link from "next/link";
-import { useActionState } from "react";
-import { FormState, handleLogin } from "@/actions/loginAction";
+import { useState } from "react";
 
 // components
 import AuthForm from "@/components/AuthForm";
 import Button from "@/components/Button";
-import FormError from "@/components/FormError";
+import FormError from "@/components/errorCom/Error";
+import { redirect } from "next/navigation";
 
 export default function Login() {
-  //initial form state
-  const loginInitialState: FormState = {
-    errors: {},
-    user: {},
+  const [err, setErr] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (!username) {
+      setIsLoading(false);
+      return setErr("Enter your username");
+    }
+
+    if (!password) {
+      setIsLoading(false);
+      return setErr("Enter your password");
+    }
+
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setIsLoading(false);
+      return setErr(data.error);
+    }
+
+    setIsLoading(false);
+    redirect("/dashboard");
+    //globall suceess msg
   };
 
-  //form state management using useActionState
-  const [state, formAction, isLoading] = useActionState(
-    handleLogin,
-    loginInitialState
-  );
   return (
     <>
       <AuthForm title="Login">
-        <form action={formAction}>
+        <form onSubmit={handleLogin} method="POST">
           <input
             className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
             type="text"
             name="username"
-            defaultValue={state.user.username}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setUsername(e.target.value);
+            }}
+            defaultValue={username}
             placeholder="Username"
           />
-          {state.errors.username && (
-            <FormError>{state.errors.username}</FormError>
-          )}
+
           <input
-            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full my-5"
+            className="block p-2 border-b-2 border-[var(--green)] outline-none rounded w-full"
             type="password"
             name="password"
-            defaultValue={state.user.password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.target.value);
+            }}
+            defaultValue={password}
             placeholder="Password"
           />
-          {state.errors.password && (
-            <FormError>{state.errors.password}</FormError>
-          )}
+          {err && <FormError>{err}</FormError>}
 
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between my-2">
             <Link className="text-[12px] cursor-pointer" href="/register">
               Register now!!!
             </Link>

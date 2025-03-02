@@ -33,7 +33,7 @@ export default function Hero() {
       <div className="relative">
         <Image
           className="mx-auto md:float-end"
-          src={"/undraw_savings_re_eq4w.svg"}
+          src={"/img/undraw_savings_re_eq4w.svg"}
           width={500}
           height={500}
           alt="hero image"

@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 //components
 import Button from "./Button";
 
-export default function AcctBalCom() {
+type AcctBalComProbs = {
+  userBalance: number;
+};
+
+export default function AcctBalCom({ userBalance }: AcctBalComProbs) {
   const [balance, setBalance] = useState(0);
 
   //get acct ballance
   useEffect(() => {
-    const userId = 1; //localStorage.getItem("userId"); or session
-    fetch(`/api/users/${userId}`)
-      .then((respond) => respond.json())
-      .then((data) => setBalance(data.balance))
-      .catch((e) => console.log(e));
-  }, []);
+    setBalance(userBalance);
+  }, [userBalance]);
 
   return (
     <div className="flex justify-end">

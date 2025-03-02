@@ -44,6 +44,7 @@ type Users = {
       bankAcctNo: number;
     };
   };
+  password: string;
 };
 
 //task data
@@ -150,6 +151,7 @@ export const users: Users[] = [
         bankAcctNo: 5091361015,
       },
     },
+    password: "pass123",
   },
   {
     id: 2,
@@ -168,5 +170,6 @@ export const users: Users[] = [
         bankAcctNo: 5091361015,
       },
     },
+    password: "pass123",
   },
 ];

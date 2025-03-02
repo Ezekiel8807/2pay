@@ -1,0 +1,54 @@
+"use client";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+// import { redirect } from "next/navigation";
+
+const deskLinks = ["Dashboard", "Account", "Transactions", "Upgrade", "Logout"];
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export default function SideNav({ token }: { token: any }) {
+  const [username, setUsername] = useState("Username");
+
+  useEffect(() => {
+    if (token != undefined) {
+      setUsername(token.username as string);
+    }
+  }, [token]);
+
+  return (
+    <div className="w-[250px] bg-[var(--green)] p-5 my-5 md:my-10 rounded mx-auto shadow-md">
+      <div className="w-[100px] h-[100px] bg-[var(--blue-dark)] shadow-md rounded-full m-auto"></div>
+      <div className="text-center">
+        <span className="font-black mt-2 block text-[var(--white)]">
+          Type: Brass
+        </span>
+        <h1 className="font-black text-[30px]">{username}</h1>
+      </div>
+
+      <nav className="">
+        {deskLinks.map((link) => {
+          if (link == "Logout") {
+            return (
+              <button
+                key={link}
+                className="font-black block p-3 hover:text-[var(--white)]"
+              >
+                {link}
+              </button>
+            );
+          } else {
+            return (
+              <Link
+                className="font-black block p-3 hover:text-[var(--white)]"
+                key={link}
+                href={`/${link.toLowerCase()}`}
+              >
+                {link}
+              </Link>
+            );
+          }
+        })}
+      </nav>
+    </div>
+  );
+}

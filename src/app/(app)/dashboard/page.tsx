@@ -1,21 +1,25 @@
-import Task from "../task/page";
+import { getToken } from "@/actions/action";
+import User from "../../../../model/userModel";
+import { connectDB } from "../../../../lib/mongodb";
+
+//componentes
 import AcctBalCom from "@/components/AcctBalCom";
+import Tasks from "@/components/Tasks";
 
 export default async function Dashboard() {
-  // try {
-  //   //
-  //   const response = await fetch(`http://localhost:3000/dashboard//api`);
-  //   const taskInfo = await response.json();
-  //   console.log(taskInfo);
-  //   //
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  const token = await getToken();
+
+  //connet to database
+  await connectDB();
+
+  //fetch user information
+  const user = await User.findOne({ _id: token?.id });
+  if (!user) return;
 
   return (
     <>
-      <AcctBalCom />
-      <Task />
+      <AcctBalCom userBalance={parseInt(user.account.balance)} />
+      <Tasks userName={user.username} />
     </>
   );
 }
