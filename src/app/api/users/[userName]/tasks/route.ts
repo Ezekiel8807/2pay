@@ -1,5 +1,5 @@
 "use server";
-import User from "../../../../../../model/userModel";
+import User from "../../../../../model/userModel";
 
 //task data model
 export async function GET(

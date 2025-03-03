@@ -35,6 +35,11 @@ export async function deleteToken() {
   cookieStore.delete("token");
 }
 
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.set("token", "", { expires: new Date(0) });
+}
+
 export async function updateTokenExpirationTime() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;

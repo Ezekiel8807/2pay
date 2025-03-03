@@ -1,158 +1,72 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
-//
+// Define Props Type
+interface ToggleBtnProps {
+  token: boolean | undefined;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ToggleBtn({ token }: any) {
-  const [isLogin, setIslogin] = useState(false);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+export default function ToggleBtn({ token }: ToggleBtnProps) {
+  const [isLogin, setIsLogin] = useState<boolean>(Boolean(token));
+  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
+  // Listen for token updates dynamically
   useEffect(() => {
-    if (token != undefined) {
-      setIslogin(true);
-    }
+    setIsLogin(Boolean(token));
   }, [token]);
+
+  // Toggle Menu Handler
+  const toggleMenu = useCallback(() => {
+    setMenuIsOpen((prev) => !prev);
+  }, []);
+
+  // Define Navigation Links
+  const menuItems = [
+    { label: "Home", href: "/", show: !isLogin },
+    { label: "Blog", href: "/blog", show: !isLogin },
+    { label: "About", href: "/about", show: !isLogin },
+    { label: "Dashboard", href: "/dashboard", show: isLogin },
+    { label: "Account", href: "/account", show: isLogin },
+    { label: "Transactions", href: "/transactions", show: isLogin },
+    { label: "Upgrade", href: "/upgrade", show: isLogin },
+    { label: "Login", href: "/login", show: !isLogin },
+    { label: "Register", href: "/register", show: !isLogin },
+    { label: "Logout", href: "/logout", show: isLogin },
+  ];
 
   return (
     <>
-      {/* toggle Button */}
-      <div
-        onClick={() => {
-          setMenuIsOpen(!menuIsOpen);
-        }}
+      {/* Toggle Button */}
+      <button
+        onClick={toggleMenu}
+        aria-expanded={menuIsOpen}
+        aria-label="Toggle navigation menu"
         className="sm:hidden absolute right-5"
       >
         <Image src="/icons/menu.png" alt="menu icon" width={30} height={30} />
-      </div>
+      </button>
 
-      {/* toggle dropdown */}
+      {/* Toggle Dropdown */}
       <div
         className={`${
-          !menuIsOpen && "hidden"
+          !menuIsOpen ? "hidden" : "block"
         } absolute top-20 z-10 right-5 bg-[var(--white)] rounded shadow-lg border-b-2 border-[var(--green)] transition-transform scale-100 ease-in-out`}
       >
         <nav className="text-center">
-          {!isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/"
-            >
-              Home
-            </Link>
-          )}
-
-          {!isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/blog"
-            >
-              Blog
-            </Link>
-          )}
-
-          {!isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/about"
-            >
-              About
-            </Link>
-          )}
-
-          {isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/dashboard"
-            >
-              Dashboard
-            </Link>
-          )}
-
-          {isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/account"
-            >
-              Account
-            </Link>
-          )}
-
-          {isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/transactions"
-            >
-              Transactions
-            </Link>
-          )}
-
-          {isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/upgrade"
-            >
-              Upgrade
-            </Link>
-          )}
-
-          {!isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/login"
-            >
-              Login
-            </Link>
-          )}
-
-          {!isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/register"
-            >
-              Register
-            </Link>
-          )}
-
-          {isLogin && (
-            <Link
-              onClick={() => {
-                setMenuIsOpen(false);
-              }}
-              className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-              href="/logout"
-            >
-              Logout
-            </Link>
+          {menuItems.map(
+            (item) =>
+              item.show && (
+                <Link
+                  key={item.href}
+                  onClick={() => setMenuIsOpen(false)}
+                  className="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+              )
           )}
         </nav>
       </div>

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-import { connectDB } from "../../../../lib/mongodb";
-import User from "../../../../model/userModel";
+import { connectDB } from "../../../lib/mongodb";
+import User from "../../../model/userModel";
 
 export async function GET() {
   try {

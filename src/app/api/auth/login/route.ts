@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
-import User from "../../../../../model/userModel";
-import { connectDB } from "../../../../../lib/mongodb";
+import User from "../../../../model/userModel";
+import { connectDB } from "../../../../lib/mongodb";
 import { encrypt } from "@/actions/action";
 
 export async function POST(request: Request) {

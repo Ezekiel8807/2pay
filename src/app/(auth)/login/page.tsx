@@ -6,13 +6,15 @@ import { useState } from "react";
 import AuthForm from "@/components/AuthForm";
 import Button from "@/components/Button";
 import FormError from "@/components/errorCom/Error";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [err, setErr] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ export default function Login() {
     }
 
     setIsLoading(false);
-    redirect("/dashboard");
+    router.replace("/dashboard");
     //globall suceess msg
   };
 

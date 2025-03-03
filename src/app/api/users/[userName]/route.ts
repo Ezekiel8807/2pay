@@ -1,6 +1,6 @@
 "use server";
-import User from "../../../../../model/userModel";
-import { connectDB } from "../../../../../lib/mongodb";
+import User from "../../../../model/userModel";
+import { connectDB } from "../../../../lib/mongodb";
 
 //task data model
 export async function GET(

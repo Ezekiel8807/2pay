@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default async function NavProfile() {
+export default function Login_out() {
   return (
     <div className="hidden md:block">
       <Link

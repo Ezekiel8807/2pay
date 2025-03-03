@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { UserProvider } from "@/components/UserProvider";
@@ -34,6 +34,9 @@ export default function RootLayout({
         <UserProvider>
           <Header />
           {children}
+          <footer className="bg-[var(--green)] text-white p-10 text-xl">
+            Hello world!
+          </footer>
         </UserProvider>
       </body>
     </html>
