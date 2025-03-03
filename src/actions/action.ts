@@ -47,7 +47,7 @@ export async function updateTokenExpirationTime() {
 
   //refresh token exipration time
   const parsed = await decrypt(token);
-  const expires = new Date(Date.now() + 2 * 60 * 1000);
+  const expires = new Date(Date.now() + 15 * 60 * 1000);
   parsed.expires = expires;
 
   //new token

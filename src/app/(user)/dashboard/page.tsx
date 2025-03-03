@@ -5,6 +5,7 @@ import { connectDB } from "../../../lib/mongodb";
 // Components
 import AcctBalCom from "@/components/AcctBalCom";
 import Tasks from "@/components/layout/Tasks";
+import Performance from "@/components/Performance";
 
 // Fetch user data on the server
 async function getUser() {
@@ -13,7 +14,7 @@ async function getUser() {
 
   await connectDB();
   return await User.findOne({ _id: token.id }).select(
-    "username account.balance"
+    "username account.balance missedTask completedTask"
   );
 }
 
@@ -24,7 +25,11 @@ export default async function Dashboard() {
 
   return (
     <>
-      <AcctBalCom userBalance={parseInt(user.account?.balance) || 0} />
+      <div className="flex flex-col md:flex-row items-center justify-end gap-5">
+        <AcctBalCom userBalance={parseInt(user.account?.balance) || 0} />
+        <Performance Missed={user.missedTask} Completed={user.completedTask} />
+      </div>
+
       <Tasks userName={user.username} />
     </>
   );
