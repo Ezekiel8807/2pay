@@ -33,7 +33,7 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
     { label: "Upgrade", href: "/upgrade", show: isLogin },
     { label: "Login", href: "/login", show: !isLogin },
     { label: "Register", href: "/register", show: !isLogin },
-    { label: "Logout", href: "/logout", show: isLogin },
+    { label: "Logout", href: "/api/auth/logout", show: isLogin },
   ];
 
   return (
