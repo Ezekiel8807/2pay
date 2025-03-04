@@ -1,7 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
+
+// components
+import Button from "./Button";
 
 // Define Props Type
 interface ToggleBtnProps {
@@ -22,6 +26,14 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
     setMenuIsOpen((prev) => !prev);
   }, []);
 
+  //Logout function
+  const logout = async () => {
+    const res = await fetch("/api/auth/logout");
+    if (res.redirected) {
+      redirect(res.url);
+    }
+  };
+
   // Define Navigation Links
   const menuItems = [
     { label: "Home", href: "/", show: !isLogin },
@@ -33,7 +45,7 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
     { label: "Upgrade", href: "/upgrade", show: isLogin },
     { label: "Login", href: "/login", show: !isLogin },
     { label: "Register", href: "/register", show: !isLogin },
-    { label: "Logout", href: "/api/auth/logout", show: isLogin },
+    // { label: "Logout", href: "#", show: isLogin },
   ];
 
   return (
@@ -67,6 +79,15 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
                   {item.label}
                 </Link>
               )
+          )}
+          {isLogin && (
+            <Button
+              disabled={false}
+              btnAction={logout}
+              btnStyle="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
+            >
+              Logout
+            </Button>
           )}
         </nav>
       </div>
