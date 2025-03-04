@@ -18,7 +18,7 @@ export default function Performance({ Missed, Completed }: PerformanceProbs) {
         <span className="font-black text-[20px] bg-[var(--green) p-2]">
           {completed}
         </span>
-        <p className="text-[10px]">Tasks Done</p>
+        <p className="text-[10px]">Tasks Completed</p>
       </div>
       <div className="w-[80px] bg-white text-center p-3 rounded-lg">
         <span className="font-black text-[20px] bg-[var(--green) p-2]">
