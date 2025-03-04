@@ -10,10 +10,10 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("2 mins from now")
     .sign(key);
 }
 
+// function to get token real values
 export async function decrypt(input: string) {
   const { payload } = await jwtVerify(input, key, {
     algorithms: ["HS256"],
@@ -47,7 +47,7 @@ export async function updateTokenExpirationTime() {
 
   //refresh token exipration time
   const parsed = await decrypt(token);
-  const expires = new Date(Date.now() + 15 * 60 * 1000);
+  const expires = new Date(Date.now() + 10 * 60 * 1000);
   parsed.expires = expires;
 
   //new token
