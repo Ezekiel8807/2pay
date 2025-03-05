@@ -2,16 +2,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import { redirect } from "next/navigation";
 
-const deskLinks = ["Dashboard", "Account", "Transactions", "Upgrade", "Logout"];
+// components
+import Logout_btn from "./Logout_btn";
+
+const deskLinks = ["Dashboard", "Account", "Transactions", "Upgrade"];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function SideNav({ token }: { token: any }) {
+  const [isLogin, setIsLogin] = useState<boolean>(Boolean(token));
   const [username, setUsername] = useState("Username");
 
   useEffect(() => {
     if (token != undefined) {
+      setIsLogin(Boolean(token));
       setUsername(token.username as string);
     }
   }, [token]);
@@ -34,28 +38,19 @@ export default function SideNav({ token }: { token: any }) {
       </div>
 
       <nav className="">
-        {deskLinks.map((link) => {
-          if (link == "Logout") {
-            return (
-              <button
-                key={link}
-                className="font-black block p-3 hover:text-[var(--white)]"
-              >
-                {link}
-              </button>
-            );
-          } else {
-            return (
-              <Link
-                className="font-black block p-3 hover:text-[var(--white)]"
-                key={link}
-                href={`/${link.toLowerCase()}`}
-              >
-                {link}
-              </Link>
-            );
-          }
-        })}
+        {deskLinks.map((link) => (
+          <Link
+            className="font-black block p-3 hover:text-[var(--white)]"
+            key={link}
+            href={`/${link.toLowerCase()}`}
+          >
+            {link}
+          </Link>
+        ))}
+
+        {isLogin && (
+          <Logout_btn logoutBtnStyle="font-black block p-3 hover:text-[var(--white)]" />
+        )}
       </nav>
     </div>
   );

@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 
 // components
-import Button from "./Button";
+import Logout_btn from "./Logout_btn";
 
 // Define Props Type
 interface ToggleBtnProps {
@@ -25,14 +24,6 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
   const toggleMenu = useCallback(() => {
     setMenuIsOpen((prev) => !prev);
   }, []);
-
-  //Logout function
-  const logout = async () => {
-    const res = await fetch("/api/auth/logout");
-    if (res.redirected) {
-      redirect(res.url);
-    }
-  };
 
   // Define Navigation Links
   const menuItems = [
@@ -81,13 +72,7 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
               )
           )}
           {isLogin && (
-            <Button
-              disabled={false}
-              btnAction={logout}
-              btnStyle="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black"
-            >
-              Logout
-            </Button>
+            <Logout_btn logoutBtnStyle="p-3 block w-[200px] hover:bg-[var(--green)] hover:text-[var(--white)] hover:font-black" />
           )}
         </nav>
       </div>
