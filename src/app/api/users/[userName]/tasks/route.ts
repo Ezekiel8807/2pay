@@ -1,5 +1,7 @@
 "use server";
+import { connectDB } from "@/lib/mongodb";
 import User from "../../../../../model/userModel";
+import { NextResponse } from "next/server";
 
 //task data model
 export async function GET(
@@ -8,15 +10,24 @@ export async function GET(
 ) {
   const { userName } = await params;
 
-  //fetch data from database
-  const user = await User.findOne({ username: userName });
-  if (!user) return;
+  //
+  try {
+    //connect to dataBase
+    await connectDB();
 
-  //respond with data
-  return new Response(JSON.stringify(user.task), {
-    headers: {
-      "Content-Typpe": "application/json",
-    },
-    status: 200,
-  });
+    //fetch data from database
+    const user = await User.findOne({ username: userName });
+    if (!user) throw new Error("user not found");
+
+    //respond with data
+    return new Response(JSON.stringify(user.tasks), {
+      headers: {
+        "Content-Typpe": "application/json",
+      },
+      status: 200,
+    });
+  } catch (err) {
+    //respond with data
+    return NextResponse.json({ error: err }, { status: 500 });
+  }
 }

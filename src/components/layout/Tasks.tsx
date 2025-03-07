@@ -15,7 +15,7 @@ type Task = {
   link?: string;
   media?: {
     type?: "link" | "image" | "video";
-    file?: string;
+    content?: string;
   };
   ispaid?: boolean;
   instruction?: string;
@@ -30,8 +30,9 @@ export default function Tasks({ userName }: TaskProbs) {
       try {
         const response = await fetch(`/api/users/${userName}/tasks`);
         const data = await response.json();
-        if (data.tasks != undefined) {
-          setDailyTasks(data.tasks);
+
+        if (data != undefined) {
+          setDailyTasks(data);
         } else {
           setDailyTasks([]);
         }

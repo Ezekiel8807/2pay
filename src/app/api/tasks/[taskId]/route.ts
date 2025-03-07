@@ -1,5 +1,4 @@
-"use server";
-import { tasks } from "@/utils/data";
+import Task from "@/model/taskModel";
 
 //task data model
 export async function GET(
@@ -9,7 +8,7 @@ export async function GET(
   const { taskId } = await params;
 
   //fetch data from database
-  const taskInfo = tasks.find((task) => task.id === parseInt(taskId));
+  const taskInfo = await Task.find({ _id: taskId });
 
   //respond with data
   return Response.json(taskInfo);

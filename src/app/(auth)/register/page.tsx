@@ -40,7 +40,7 @@ export default function Register() {
       return setErr("Password don't match");
     }
 
-    const res = await fetch("/api/users", {
+    const res = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({ username, email, password }),
     });
@@ -49,7 +49,7 @@ export default function Register() {
 
     if (!res.ok) {
       setIsLoading(false);
-      return setErr(data.err);
+      return setErr(data.error);
     }
 
     setIsLoading(false);

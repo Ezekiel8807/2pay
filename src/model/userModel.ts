@@ -1,24 +1,24 @@
 import mongoose, { models } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  firstname: { type: String, require: "" },
-  lastname: { type: String, require: "" },
+  firstname: { type: String, default: "" },
+  lastname: { type: String, default: "" },
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   rank: { type: Number, default: 1 },
   isAdmin: { type: Boolean, default: false },
-  task: [
+  tasks: [
     {
-      name: { type: String, require: "" },
+      name: { type: String, default: "" },
       level: { type: Number, default: 1 },
       price: { type: Number, default: 0 },
-      state: { type: String, require: "" },
+      state: { type: String, default: "" },
       media: {
-        type: { type: String, require: "" },
-        content: { type: String, require: "" },
+        type: { type: String, default: "" },
+        content: { type: String, default: "" },
       },
       isPaid: { type: Boolean, default: false },
-      instruction: { type: String, require: "" },
+      instruction: { type: String, default: "" },
     },
   ],
   missedTask: { type: Number, default: 0 },
@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
   account: {
     balance: { type: Number, default: 0 },
     withdrawer: {
-      bankName: { type: String, require: "" },
+      bankName: { type: String, default: "" },
       bankAcctNo: { type: Number, default: 123456890 },
     },
   },
