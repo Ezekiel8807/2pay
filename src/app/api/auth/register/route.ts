@@ -4,63 +4,54 @@ import User from "@/model/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 
-//register function
+// Register function
 export async function POST(request: NextRequest) {
   try {
     const { username, email, password } = await request.json();
 
-    if (!username || !email || !password)
-      throw new Error("All frields require");
-
-    // ✅database connection
-    await connectDB();
-
-    //check existing User
-    const existingUser = await User.findOne({
-      $or: [{ username }, { email }],
-    });
-
-    if (existingUser) {
-      if (existingUser.username == username || existingUser.email == email)
-        throw new Error("User Exist!");
+    if (!username || !email || !password) {
+      throw new Error("All fields are required");
     }
 
-    //hash password
+    // ✅ Database connection
+    await connectDB();
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+
+    if (existingUser) {
+      throw new Error("User already exists!");
+    }
+
+    // Hash password
     const hashPass = await bcrypt.hash(password, 10);
 
-    //get task from task database
+    // Get a random task from the task collection
     const task = await Task.aggregate([{ $sample: { size: 1 } }]);
+    const assignedTask = task?.[0] || null; // Assign task if available
 
-    // If no tasks are available, proceed without assigning a task
-    const assignedTask = task.length > 0 ? task[0] : null;
-
-    // Create the user with the task in their `tasks` array
+    // Create new user
     const newUser = new User({
-      username: username,
-      email: email,
-      tasks: !assignedTask ? [] : [assignedTask], // Assign the task if available
+      username,
+      email,
+      tasks: assignedTask ? [assignedTask] : [],
       password: hashPass,
     });
 
-    //save new user
     await newUser.save();
 
-    // Redirect user
-    // return NextResponse.redirect(new URL("/login", request.url));
+    // Return success response
     return NextResponse.json(
-      { success: `Account created Successfully` },
+      { success: "Account created successfully" },
       { status: 201 }
     );
+
     //
-    //
-  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     return NextResponse.json(
-      { error: `Failed to create users: ${err}` },
+      { error: `Failed to create user: ${err.message}` },
       { status: 500 }
     );
-    // return new Response(JSON.stringify({ error: "Wrong credentials" }), {
-    //   headers: { "Content-Type": "application/json" },
-    //   status: 500,
-    // });
   }
 }

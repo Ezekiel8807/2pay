@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { getToken } from "@/actions/action";
 import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
@@ -12,7 +13,10 @@ async function getUser() {
   const token = await getToken();
   if (!token?.id) return null;
 
+  //db connection
   await connectDB();
+
+  //user data returned
   return await User.findOne({ _id: token.id }).select(
     "username account.balance missedTask completedTask"
   );
@@ -21,7 +25,9 @@ async function getUser() {
 export default async function Dashboard() {
   const user = await getUser(); // Fetch user data before rendering
 
-  if (!user) return <p>User not found</p>;
+  if (!user) {
+    return redirect("/login");
+  }
 
   return (
     <>
