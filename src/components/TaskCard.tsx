@@ -15,17 +15,17 @@ import back2 from "../../public/img/b.jpg";
 import back3 from "../../public/img/c.jpg";
 import back4 from "../../public/img/d.jpg";
 
-// function to select roundom image
-function getroundBackTaskImg() {
-  //image array
-  const taskBack = [back1, back2, back3, back4];
-
-  const roundomNum = Math.floor(Math.random() * taskBack.length - 1);
-  return taskBack[roundomNum];
-}
-
 export default function TaskCard({ userTask }: { userTask: userTask }) {
   const router = useRouter();
+
+  // function to select roundom image
+  function getroundBackTaskImg() {
+    //image array
+    const taskBack = [back1, back2, back3, back4];
+
+    const roundomNum = Math.floor(Math.random() * taskBack.length - 1);
+    return taskBack[roundomNum];
+  }
 
   return (
     <div
