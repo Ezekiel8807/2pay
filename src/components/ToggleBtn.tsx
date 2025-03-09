@@ -48,7 +48,13 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
         aria-label="Toggle navigation menu"
         className="sm:hidden absolute right-5"
       >
-        <Image src="/icons/menu.png" alt="menu icon" width={30} height={30} />
+        <Image
+          src="/icons/menu.png"
+          alt="menu icon"
+          width={30}
+          height={30}
+          style={{ width: "auto", height: "auto" }}
+        />
       </button>
 
       {/* Toggle Dropdown */}

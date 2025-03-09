@@ -29,6 +29,7 @@ export default function Hero() {
           width={500}
           height={500}
           alt="hero image"
+          priority
         />
         <div className="w-[150px] h-[150px] absolute top-0 left-0 md:bottom-0  -z-10 rounded-[220px] blur-[30px] bg-[#29cd9c4d]"></div>
       </div>

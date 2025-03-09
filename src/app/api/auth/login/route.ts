@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   }
 
   // Generate JWT token
-  const expires = new Date(Date.now() + 10 * 60 * 1000);
+  const expires = new Date(Date.now() + 60 * 60 * 1000);
   const token = await encrypt({
     id: user._id,
     username: user.username,
