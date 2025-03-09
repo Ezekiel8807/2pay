@@ -53,10 +53,8 @@ export default function Tasks({ userName }: TaskProbs) {
         <div className="mx-auto grid grid-flow-col gap-5 overflow-x-scroll no-scrollbar">
           {dailyTasks.length > 0 ? (
             dailyTasks.map((dailyTask) => {
-              const { _id, name, level, price } = dailyTask;
-              return (
-                <TaskCard key={_id} userTask={{ _id, name, level, price }} />
-              );
+              const { _id, level, price } = dailyTask;
+              return <TaskCard key={_id} userTask={{ _id, level, price }} />;
             })
           ) : (
             <p className="flex items-center justify-center h-full">

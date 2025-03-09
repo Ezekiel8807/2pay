@@ -9,7 +9,7 @@ export default function Performance({ Missed, Completed }: PerformanceProbs) {
   const completed = Completed || 0;
 
   return (
-    <div className="flex flex-row justify-around items-center w-[100%] sm:w-[250px] md:w-[300px] bg-[#29cd9c34]  p-2 md:p-3 shadow-md rounded-lg">
+    <div className="flex flex-row justify-around items-center w-[100%] sm:w-[250px] md:w-[300px] bg-[var(--green)]  p-2 md:p-3 shadow-md rounded-lg">
       <div className="w-[80px] bg-white text-center p-3 rounded-lg">
         <span className="font-black text-[20px]">{overall}</span>
         <p className="text-[10px]">Tasks Overall </p>

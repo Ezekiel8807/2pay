@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 type userTask = {
   _id?: string;
-  name?: string;
   level?: number;
   price?: number;
 };
@@ -13,15 +12,14 @@ type userTask = {
 import back1 from "../../public/img/a.jpg";
 import back2 from "../../public/img/b.jpg";
 import back3 from "../../public/img/c.jpg";
-import back4 from "../../public/img/d.jpg";
 
 export default function TaskCard({ userTask }: { userTask: userTask }) {
   const router = useRouter();
 
   // function to select roundom image
   function getroundBackTaskImg() {
-    //image array
-    const taskBack = [back1, back2, back3, back4];
+    // image array
+    const taskBack = [back1, back2, back3];
 
     const roundomNum = Math.floor(Math.random() * taskBack.length - 1);
     return taskBack[roundomNum];
@@ -40,15 +38,25 @@ export default function TaskCard({ userTask }: { userTask: userTask }) {
         className="w-full h-full rounded-lg"
       />
 
-      <div className="absolute top-0 left-0 p-2 w-[200px] h-[200px] bg-[var(--gray-05)]hover:bg-[var(--green)]">
-        <div className="flex flex-col justify-between">
-          <div className="w-[40px] h-[40px] rounded-full bg-[] items-center text-center">
-            {userTask.level}
+      <div className="absolute top-0 left-0  w-[200px] h-[200px] ">
+        <div className="w-full h-full p-2 rounded-lg">
+          <div className="flex flex-row p-3 justify-end ">
+            <div className="flex flex-row justify-between items-center w-[100px] bg-[var(--green)] rounded-full">
+              <div className="w-[30px] h-[30px] p-2 rounded-full bg-[var(--white)]">
+                <Image
+                  src={back2}
+                  width={100}
+                  alt="social icons"
+                  className="m-auto"
+                />
+              </div>
+              <span className="mx-3 font-black text-[12px]">
+                Level: {userTask.level}
+              </span>
+            </div>
           </div>
 
-          <p>{userTask.name}</p>
-
-          <div className=" font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--green)] group-hover:bg-[var(--white)] rounded-lg">
+          <div className=" absolute font-black p-1 w-[60px] text-center left-5 bottom-5 bg-[var(--green)] text-[var(--white)] rounded-lg">
             {`#${userTask.price}`}
           </div>
         </div>
