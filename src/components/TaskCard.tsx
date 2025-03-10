@@ -31,13 +31,14 @@ import taskBackImg from "../../public/img/b.jpg";
 export default function TaskCard({ userTask }: { userTask: userTask }) {
   const [targetSocialIcon, setTargetSocialIcon] =
     useState<StaticImageData>(web);
-  const [taskBackImage, setTaskBackImage] =
-    useState<StaticImageData>(taskBackImg);
+  const [taskBackImage, setTaskBackImage] = useState<StaticImageData | string>(
+    taskBackImg
+  );
 
   const router = useRouter();
 
   // const taskBackImgCheck: StaticImageData | string =
-  //   userTask.media?.content != "" ? userTask.media?.content : taskkBackImg;
+  //    ? userTask.media?.content : taskkBackImg;
   // const taskBackvidCheck: StaticImageData | string =
   //   userTask.media?.content != "" ? userTask.media?.content : taskkBackImg;
 
@@ -50,7 +51,11 @@ export default function TaskCard({ userTask }: { userTask: userTask }) {
   //   return taskBack[roundomNum];
   // }
 
-  // function checkTaskMediaImage() {}
+  function checkTaskMediaImage(mediaContent: string) {
+    if (mediaContent != "") {
+      setTaskBackImage(mediaContent);
+    }
+  }
 
   //fuction to set social icons base on task social target
   function checkTaskSocial(socialTarget: string) {
@@ -83,7 +88,8 @@ export default function TaskCard({ userTask }: { userTask: userTask }) {
 
   useEffect(() => {
     checkTaskSocial(userTask.socialTarget as string);
-  }, [userTask.socialTarget]);
+    checkTaskMediaImage(userTask.media?.content as string);
+  }, [userTask.socialTarget, userTask.media?.content]);
 
   return (
     <div
