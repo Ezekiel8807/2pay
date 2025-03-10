@@ -18,7 +18,7 @@ async function getUser() {
 
   //user data returned
   return await User.findOne({ _id: token.id }).select(
-    "username account.balance missedTask completedTask"
+    "username account.balance overallTask completedTask"
   );
 }
 
@@ -33,7 +33,10 @@ export default async function Dashboard() {
     <>
       <div className="flex flex-col md:flex-row items-center justify-end gap-5">
         <AcctBalCom userBalance={parseInt(user.account?.balance) || 0} />
-        <Performance Missed={user.missedTask} Completed={user.completedTask} />
+        <Performance
+          Overall={user.overallTask}
+          Completed={user.completedTask}
+        />
       </div>
 
       <Tasks userName={user.username} />

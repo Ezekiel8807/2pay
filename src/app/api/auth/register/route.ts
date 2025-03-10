@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
     const newUser = new User({
       username,
       email,
+      overallTask: task.length,
       tasks: assignedTask ? [assignedTask] : [],
       password: hashPass,
     });

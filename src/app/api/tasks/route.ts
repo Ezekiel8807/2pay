@@ -11,8 +11,6 @@ export async function GET() {
     //fetch data from database
     const tasks = await Task.find();
 
-    // if (!tasks) return;
-
     //respond with data
     return Response.json(tasks);
   } catch (err) {
@@ -20,7 +18,7 @@ export async function GET() {
   }
 }
 
-//task data model
+// create new task
 export async function POST(request: NextRequest) {
   try {
     const newTask = await request.json();
@@ -38,6 +36,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { msg: "Task created", task: cTask },
       { status: 201 }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Delete all tasks
+export async function DELETE() {
+  try {
+    //connecd to dataBase
+    await connectDB();
+
+    //create new taskk
+    const deletedTask = await Task.deleteMany();
+
+    //respond with data
+    return NextResponse.json(
+      { msg: "All tasks deleted", task: deletedTask },
+      { status: 200 }
     );
   } catch (err) {
     console.log(err);

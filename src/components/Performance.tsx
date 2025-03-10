@@ -1,11 +1,11 @@
 type PerformanceProbs = {
-  Missed: number;
+  Overall: number;
   Completed: number;
 };
 
-export default function Performance({ Missed, Completed }: PerformanceProbs) {
-  const missed = Missed || 0;
-  const overall = Missed + Completed || 0;
+export default function Performance({ Overall, Completed }: PerformanceProbs) {
+  const missed = Overall - Completed || 0;
+  const overall = Overall || 0;
   const completed = Completed || 0;
 
   return (

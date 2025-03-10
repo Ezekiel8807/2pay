@@ -15,3 +15,25 @@ export async function GET() {
     );
   }
 }
+
+// delete all users
+export async function DELETE() {
+  try {
+    await connectDB(); // Connect to MongoDB
+
+    //delete
+    const deleteUsers = await User.deleteMany();
+
+    //responce
+    return NextResponse.json(
+      { msg: "All users deleted", data: deleteUsers },
+      { status: 200 }
+    );
+    //
+  } catch (err) {
+    return NextResponse.json(
+      { error: `Failed to fetch users encouunter ${err}` },
+      { status: 500 }
+    );
+  }
+}

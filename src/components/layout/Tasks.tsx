@@ -11,10 +11,11 @@ type Task = {
   name?: string;
   level?: number;
   price?: number;
+  socialTarget: string;
   state?: string;
   link?: string;
   media?: {
-    type?: "link" | "image" | "video";
+    type?: "image" | "video" | "others";
     content?: string;
   };
   ispaid?: boolean;
@@ -53,8 +54,13 @@ export default function Tasks({ userName }: TaskProbs) {
         <div className="mx-auto grid grid-flow-col gap-5 overflow-x-scroll no-scrollbar">
           {dailyTasks.length > 0 ? (
             dailyTasks.map((dailyTask) => {
-              const { _id, level, price } = dailyTask;
-              return <TaskCard key={_id} userTask={{ _id, level, price }} />;
+              const { _id, level, media, price, socialTarget } = dailyTask;
+              return (
+                <TaskCard
+                  key={_id}
+                  userTask={{ _id, level, media, price, socialTarget }}
+                />
+              );
             })
           ) : (
             <p className="flex items-center justify-center h-full">
