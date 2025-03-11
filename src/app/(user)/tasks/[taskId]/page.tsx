@@ -1,13 +1,15 @@
 import Image from "next/image";
 import mongoose from "mongoose";
 import User from "@/model/userModel";
-// import Task from "@/model/taskModel";
 import { connectDB } from "@/lib/mongodb";
 import { redirect } from "next/navigation";
 import { getToken } from "@/actions/action";
 
+// images
+
 //components
 import Button from "@/components/Button";
+import TaskSubmissionForm from "@/components/TaskSubmissionForm";
 
 export default async function TaskDetails({
   params,
@@ -142,15 +144,10 @@ export default async function TaskDetails({
 
           <div className="w-[100%] md:w-[60%] mb-10">
             <h1 className="w-[200px] font-black text-3xl text-center mb-0 p-10 md:p-0 md:mb-5 m-auto">
-              Task Submition
+              Task Submission
             </h1>
 
-            <div className="flex w-[100%] bg-red-500 p-5">
-              <div className="grid grid-cols-2">
-                <div className="w-full"></div>
-                <div className="w-full p-5"></div>
-              </div>
-            </div>
+            <TaskSubmissionForm />
           </div>
         </>
       )}
