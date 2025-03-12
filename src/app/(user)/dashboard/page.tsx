@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { redirect } from "next/navigation";
 import { getToken } from "@/actions/action";
 import User from "../../../model/userModel";
@@ -32,7 +33,9 @@ export default async function Dashboard() {
   }
 
   // filter tasks that have new state
-  const filterUserTask = user.tasks.filter((e) => e.state === "new");
+  const filterUserTask = user.tasks.filter(
+    (e: { state: string }) => e.state === "new"
+  );
 
   return (
     <>
@@ -55,15 +58,23 @@ export default async function Dashboard() {
       <div className="bg-[var(--gray-01)] h-[250px] p-5 my-5 rounded">
         <div className="mx-auto grid grid-flow-col gap-5 overflow-x-scroll no-scrollbar">
           {filterUserTask.length > 0 ? (
-            filterUserTask.map((task) => {
-              const { _id, level, media, price, socialTarget } = task;
-              return (
-                <TaskCard
-                  key={_id}
-                  userTask={{ _id, level, media, price, socialTarget }}
-                />
-              );
-            })
+            filterUserTask.map(
+              (task: {
+                _id: any;
+                level: any;
+                media: any;
+                price: any;
+                socialTarget: any;
+              }) => {
+                const { _id, level, media, price, socialTarget } = task;
+                return (
+                  <TaskCard
+                    key={_id}
+                    userTask={{ _id, level, media, price, socialTarget }}
+                  />
+                );
+              }
+            )
           ) : (
             <p className="flex items-center justify-center h-full">
               Opps.. tasks unavailable
