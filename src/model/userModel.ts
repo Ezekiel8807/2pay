@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
         enum: ["new", "review", "completed"],
         default: "new",
       },
+      socialTarget: { type: String, default: "" },
       media: {
         type: {
           type: String,

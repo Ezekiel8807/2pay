@@ -3,16 +3,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
-type userTask = {
-  _id?: string;
-  level?: number;
-  price?: number;
-  socialTarget?: string;
-  media?: {
-    type?: "image" | "video" | "others";
-    content?: string;
-  };
-};
+// type userTask = {
+//   _id?: string;
+//   level?: number;
+//   price?: number;
+//   socialTarget?: string;
+//   media?: {
+//     type?: "image" | "video" | "others";
+//     content?: string;
+//   };
+// };
 
 //icons
 import web from "../../public/icons/f.svg";
@@ -28,7 +28,7 @@ import taskBackImg from "../../public/img/b.jpg";
 //video
 // import taskBackVid from "../../public/video/a.mp4";
 
-export default function TaskCard({ userTask }: { userTask: userTask }) {
+export default function TaskCard({ userTask }) {
   const [targetSocialIcon, setTargetSocialIcon] =
     useState<StaticImageData>(web);
   const [taskBackImage, setTaskBackImage] = useState<StaticImageData | string>(

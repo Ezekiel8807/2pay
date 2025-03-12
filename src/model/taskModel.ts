@@ -1,9 +1,14 @@
 import mongoose, { models } from "mongoose";
 
 const TaskSchema = new mongoose.Schema({
-  name: { type: String, require: true }, /// task name is required
+  name: { type: String, default: "" },
   level: { type: Number, default: 1 },
-  price: { type: Number, require: true }, /// task price is required
+  price: { type: Number, default: 0 },
+  state: {
+    type: String,
+    enum: ["new", "review", "completed"],
+    default: "new",
+  },
   socialTarget: { type: String, default: "" },
   media: {
     type: {
@@ -13,9 +18,8 @@ const TaskSchema = new mongoose.Schema({
     },
     content: { type: String, default: "" },
   },
-  link: { type: String, default: "" },
   isPaid: { type: Boolean, default: false },
-  instruction: { type: String, require: true }, /// task instructin is required
+  instruction: { type: String, default: "" },
 });
 
 const Task = models?.Task || mongoose.model("Task", TaskSchema);

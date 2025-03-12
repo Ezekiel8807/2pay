@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+//image
+import heroImage from "../../../public/img/e.svg";
+
 export default function Hero() {
   return (
     <div className="mx-auto flex flex-col-reverse md:flex-row items-center justify-center p-5 md:p-10">
@@ -24,12 +27,12 @@ export default function Hero() {
 
       <div className="relative">
         <Image
-          className="mx-auto md:float-end"
-          src={"/img/undraw_savings_re_eq4w.svg"}
+          src={heroImage}
           width={500}
           height={500}
           alt="hero image"
-          priority
+          className="mx-auto md:float-end"
+          style={{ width: "auto", height: "auto" }}
         />
         <div className="w-[150px] h-[150px] absolute top-0 left-0 md:bottom-0  -z-10 rounded-[220px] blur-[30px] bg-[#29cd9c4d]"></div>
       </div>

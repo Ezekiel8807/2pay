@@ -5,8 +5,9 @@ import { connectDB } from "../../../lib/mongodb";
 
 // Components
 import AcctBalCom from "@/components/AcctBalCom";
-import Tasks from "@/components/layout/Tasks";
+// import Tasks from "@/components/layout/Tasks";
 import Performance from "@/components/Performance";
+import TaskCard from "@/components/TaskCard";
 
 // Fetch user data on the server
 async function getUser() {
@@ -16,10 +17,11 @@ async function getUser() {
   //db connection
   await connectDB();
 
-  //user data returned
-  return await User.findOne({ _id: token.id }).select(
-    "username account.balance overallTask completedTask"
-  );
+  // Find user and populate tasks
+  const user = await User.findOne({ _id: token.id }).populate("tasks");
+
+  // Convert user data to a plain JavaScript object
+  return JSON.parse(JSON.stringify(user));
 }
 
 export default async function Dashboard() {
@@ -29,17 +31,46 @@ export default async function Dashboard() {
     return redirect("/login");
   }
 
+  // filter tasks that have new state
+  const filterUserTask = user.tasks.filter((e) => e.state === "new");
+
   return (
     <>
       <div className="flex flex-col sm:flex-row items-center justify-end gap-5">
-        <AcctBalCom userBalance={parseInt(user.account?.balance) || 0} />
+        <AcctBalCom
+          firstName={user.firstname}
+          lastName={user.lastname}
+          userRank={user.rank}
+          userBalance={parseInt(user.account?.balance) || 0}
+        />
         <Performance
           Overall={user.overallTask}
           Completed={user.completedTask}
         />
       </div>
 
-      <Tasks userName={user.username} />
+      <h1 className="font-black text-[30px] mt-5">Tasks</h1>
+      <p>Earn real cash for completing task.</p>
+
+      <div className="bg-[var(--gray-01)] h-[250px] p-5 my-5 rounded">
+        <div className="mx-auto grid grid-flow-col gap-5 overflow-x-scroll no-scrollbar">
+          {filterUserTask.length > 0 ? (
+            filterUserTask.map((task) => {
+              const { _id, level, media, price, socialTarget } = task;
+              return (
+                <TaskCard
+                  key={_id}
+                  userTask={{ _id, level, media, price, socialTarget }}
+                />
+              );
+            })
+          ) : (
+            <p className="flex items-center justify-center h-full">
+              Opps.. tasks unavailable
+            </p>
+          )}
+        </div>
+      </div>
     </>
   );
 }
