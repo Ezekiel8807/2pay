@@ -2,7 +2,7 @@ import "../globals.css";
 
 // compponents
 import Header from "@/components/layout/Header";
-import DashSideNav from "@/components/DashSideNav";
+import DashSideNav from "@/components/layout/DashSideNav";
 
 export default function DashhboardLayout({
   children,

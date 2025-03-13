@@ -56,7 +56,7 @@ export default async function Dashboard() {
       <p>Earn real cash for completing task.</p>
 
       <div className="bg-[var(--gray-01)] h-[250px] p-5 my-5 rounded">
-        <div className="mx-auto grid grid-flow-col gap-5 overflow-x-scroll no-scrollbar">
+        <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar">
           {filterUserTask.length > 0 ? (
             filterUserTask.map(
               (task: {
