@@ -5,8 +5,8 @@ import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
 
 // Components
+import SubHeading from "@/components/SubHeading";
 import AcctBalCom from "@/components/AcctBalCom";
-// import Tasks from "@/components/layout/Tasks";
 import Performance from "@/components/Performance";
 import TaskCard from "@/components/TaskCard";
 
@@ -52,8 +52,9 @@ export default async function Dashboard() {
         />
       </div>
 
-      <h1 className="font-black text-[30px] mt-5">Tasks</h1>
-      <p>Earn real cash for completing task.</p>
+      <div className="mt-5">
+        <SubHeading title="Tasks" desc="Earn real cash for completing task." />
+      </div>
 
       <div className="bg-[var(--gray-01)] h-[250px] p-5 my-5 rounded">
         <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar">

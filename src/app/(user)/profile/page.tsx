@@ -5,6 +5,7 @@ import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
 
 // Components
+import SubHeading from "@/components/SubHeading";
 
 // Fetch user data on the server
 async function getUser() {
@@ -30,8 +31,7 @@ export default async function Profile() {
 
   return (
     <>
-      <h1 className="font-black text-[30px]">Profile</h1>
-      <p>Everything about you.</p>
+      <SubHeading title="Profile" desc="Everything about you." />
     </>
   );
 }

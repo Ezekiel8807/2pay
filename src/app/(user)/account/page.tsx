@@ -7,6 +7,7 @@ import { connectDB } from "../../../lib/mongodb";
 import BankInfo from "@/components/BankInfo";
 import TransCard from "@/components/TransCard";
 import AcctBalCom from "@/components/AcctBalCom";
+import SubHeading from "@/components/SubHeading";
 
 // Fetch user data on the server
 async function getUser() {
@@ -32,8 +33,7 @@ export default async function Account() {
 
   return (
     <div>
-      <h1 className="font-black text-[30px]">Account</h1>
-      <p>Everything about your account.</p>
+      <SubHeading title="Account" desc="Everything about your account." />
 
       <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar  my-3">
         <div className="w-[275px] h-[130px] md:w-[300px]">
@@ -51,9 +51,11 @@ export default async function Account() {
       <div className="scroll-smooth"></div>
 
       <div className="flex flex-col md:flex-row">
-        <div className="">
-          <h1 className="font-black text-[30px]">Transaction</h1>
-          <p>Transaction history right here.</p>
+        <div>
+          <SubHeading
+            title="Transaction"
+            desc="Transaction history right here."
+          />
           <div className="w-[100%] h-[200px] py-3 overflow-y-scroll">
             <TransCard />
             <TransCard />

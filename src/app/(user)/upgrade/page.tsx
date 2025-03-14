@@ -5,6 +5,7 @@ import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
 
 // Components
+import SubHeading from "@/components/SubHeading";
 
 // Fetch user data on the server
 async function getUser() {
@@ -30,8 +31,7 @@ export default async function Upgrade() {
 
   return (
     <>
-      <h1 className="font-black text-[30px]">Upgrade</h1>
-      <p>Heigher previledges upgrading.</p>
+      <SubHeading title="Upgrade" desc="Heigher previledges upgrading." />
     </>
   );
 }

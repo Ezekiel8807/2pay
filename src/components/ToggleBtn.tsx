@@ -31,12 +31,12 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
     { label: "Blog", href: "/blog", show: !isLogin },
     { label: "About", href: "/about", show: !isLogin },
     { label: "Dashboard", href: "/dashboard", show: isLogin },
+    { label: "Profile", href: "/profile", show: isLogin },
     { label: "Account", href: "/account", show: isLogin },
     { label: "Transactions", href: "/transactions", show: isLogin },
     { label: "Upgrade", href: "/upgrade", show: isLogin },
     { label: "Login", href: "/login", show: !isLogin },
     { label: "Register", href: "/register", show: !isLogin },
-    // { label: "Logout", href: "#", show: isLogin },
   ];
 
   return (

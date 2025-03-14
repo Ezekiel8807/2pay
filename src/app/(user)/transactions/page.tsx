@@ -6,6 +6,7 @@ import { connectDB } from "../../../lib/mongodb";
 
 // Components
 import TransCard from "@/components/TransCard";
+import SubHeading from "@/components/SubHeading";
 
 // Fetch user data on the server
 async function getUser() {
@@ -31,8 +32,7 @@ export default async function Transactions() {
 
   return (
     <>
-      <h1 className="font-black text-[30px]">Transaction</h1>
-      <p>Transaction history right here.</p>
+      <SubHeading title="Transactions" desc="Transaction history right here." />
 
       <div className="w-[100%] py-5 overflow-y-scroll">
         <TransCard />
