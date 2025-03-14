@@ -36,12 +36,14 @@ export default async function Account() {
       <p>Everything about your account.</p>
 
       <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar  my-3">
-        <AcctBalCom
-          firstName={user.firstname}
-          lastName={user.lastname}
-          userRank={user.rank}
-          userBalance={parseInt(user.account?.balance) || 0}
-        />
+        <div className="w-[275px] h-[130px] md:w-[300px]">
+          <AcctBalCom
+            firstName={user.firstname}
+            lastName={user.lastname}
+            userRank={user.rank}
+            userBalance={parseInt(user.account?.balance) || 0}
+          />
+        </div>
 
         <BankInfo />
       </div>
