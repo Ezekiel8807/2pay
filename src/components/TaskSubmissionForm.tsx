@@ -1,17 +1,17 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+// import { useState } from "react";
 
 // images
 import subImage from "../../public/img/d.jpg";
 import Button from "./Button";
 
 export default function TaskSubmissionForm() {
-  const [file, setFile] = useState();
+  // const [file, setFile] = useState();
 
-  function getImage(e: React.ChangeEventHandler<HTMLInputElement>) {
-    console.log(e);
-  }
+  // function getImage(e: React.ChangeEventHandler<HTMLInputElement>) {
+  //   console.log(e);
+  // }
   return (
     <div className="flex w-[100%]">
       <div className="grid grid-cols-1 md:grid-cols-2">
@@ -26,7 +26,6 @@ export default function TaskSubmissionForm() {
                 className="w-full bg-red-500 "
                 type="image"
                 placeholder="Select an image"
-                onChange={getImage}
                 required
               />
             </div>

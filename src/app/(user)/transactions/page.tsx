@@ -30,11 +30,11 @@ export default async function Transactions() {
   }
 
   return (
-    <div>
+    <>
       <h1 className="font-black text-[30px]">Transaction</h1>
       <p>Transaction history right here.</p>
 
-      <div>
+      <div className="w-[100%] py-5 overflow-y-scroll">
         <TransCard />
         <TransCard />
         <TransCard />
@@ -42,6 +42,6 @@ export default async function Transactions() {
         <TransCard />
         <TransCard />
       </div>
-    </div>
+    </>
   );
 }

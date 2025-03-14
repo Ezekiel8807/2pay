@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* -eslint-disable @typescript-eslint/no-explicit-any- */
 import { redirect } from "next/navigation";
 import { getToken } from "@/actions/action";
 import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
 
 // Components
-import AcctBalCom from "@/components/AcctBalCom";
-// import Tasks from "@/components/layout/Tasks";
-import Performance from "@/components/Performance";
-import TaskCard from "@/components/TaskCard";
 
 // Fetch user data on the server
 async function getUser() {

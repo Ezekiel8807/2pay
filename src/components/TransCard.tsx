@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function TransCard() {
   return (
-    <div className="w-full flex flex-row justify-between gap-3">
+    <div className="w-full flex flex-row justify-between mt-3 gap-3">
       <div className="flex flex-row justify-start gap-2">
         <Image
           src="/img/e.svg"

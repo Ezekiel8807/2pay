@@ -9,7 +9,7 @@ export async function PATCH() {
     await connectDB();
 
     // fetch all users
-    const allUsers = await User.find();
+    const allUsers = await User.find({ isAdmin: false });
 
     // featch all taskS
     let allTasks = await Task.find();
@@ -22,13 +22,12 @@ export async function PATCH() {
       const tasksToAssign = user.rank || 1; // Default to 2 if rank is unknown
       const assignedTasks = allTasks.splice(0, tasksToAssign); // Assign tasks and remove from the pool
 
-      // Update user's overallTasks count
       user.overallTask += assignedTasks.length;
 
       // Update the user's tasks and overall task count
       await User.findByIdAndUpdate(user._id, {
-        $set: { tasks: assignedTasks }, // Replace entire array
-        $inc: { overallTask: assignedTasks.length }, // Ensure consistency with field naming
+        $set: { tasks: assignedTasks },
+        $inc: { overallTask: assignedTasks.length }, // update overall task
       });
     }
 
