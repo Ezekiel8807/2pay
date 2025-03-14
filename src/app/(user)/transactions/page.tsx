@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* ---eslint-disable @typescript-eslint/no-explicit-any-- */
 import { redirect } from "next/navigation";
 import { getToken } from "@/actions/action";
 import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
 
 // Components
-import Transaction from "@/components/layout/Transaction";
+import TransCard from "@/components/TransCard";
 
 // Fetch user data on the server
 async function getUser() {
@@ -29,9 +29,19 @@ export default async function Transactions() {
     return redirect("/login");
   }
 
-  return 
-    
-        <Transaction />
+  return (
+    <div>
+      <h1 className="font-black text-[30px]">Transaction</h1>
+      <p>Transaction history right here.</p>
 
-  
+      <div>
+        <TransCard />
+        <TransCard />
+        <TransCard />
+        <TransCard />
+        <TransCard />
+        <TransCard />
+      </div>
+    </div>
+  );
 }

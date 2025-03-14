@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { redirect } from "next/navigation";
 import { getToken } from "@/actions/action";
 import User from "../../../model/userModel";
 import { connectDB } from "../../../lib/mongodb";
 
 // Components
-import AcctBalCom from "@/components/AcctBalCom";
-// import Tasks from "@/components/layout/Tasks";
-import Performance from "@/components/Performance";
-import TaskCard from "@/components/TaskCard";
 import BankInfo from "@/components/BankInfo";
+import TransCard from "@/components/TransCard";
+import AcctBalCom from "@/components/AcctBalCom";
 
 // Fetch user data on the server
 async function getUser() {
@@ -52,8 +49,17 @@ export default async function Account() {
       <div className="scroll-smooth"></div>
 
       <div className="flex flex-col md:flex-row">
-        <div></div>
-        <div></div>
+        <div className="">
+          <h1 className="font-black text-[30px]">Transaction</h1>
+          <p>Transaction history right here.</p>
+          <div className="w-[100%] h-[200px] py-3 overflow-y-scroll">
+            <TransCard />
+            <TransCard />
+            <TransCard />
+            <TransCard />
+            <TransCard />
+          </div>
+        </div>
       </div>
     </div>
   );
