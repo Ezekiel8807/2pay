@@ -6,7 +6,13 @@ import { useEffect, useState } from "react";
 // components
 import Logout_btn from "./Logout_btn";
 
-const deskLinks = ["Dashboard", "Account", "Transactions", "Upgrade"];
+const deskLinks = [
+  "Dashboard",
+  "Profile",
+  "Account",
+  "Transactions",
+  "Upgrade",
+];
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function SideNav({ token }: { token: any }) {

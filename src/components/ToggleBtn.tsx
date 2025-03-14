@@ -46,7 +46,7 @@ export default function ToggleBtn({ token }: ToggleBtnProps) {
         onClick={toggleMenu}
         aria-expanded={menuIsOpen}
         aria-label="Toggle navigation menu"
-        className="md:hidden absolute right-5"
+        className="lg:hidden absolute right-5"
       >
         <Image
           src="/icons/menu.png"
