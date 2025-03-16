@@ -38,7 +38,7 @@ export default async function Dashboard() {
   );
 
   return (
-    <>
+    <div className="w-[100%] sm:w-[90%]  m-auto">
       <div className="flex flex-col sm:flex-row items-center justify-end gap-5">
         <AcctBalCom
           firstName={user.firstname}
@@ -52,37 +52,44 @@ export default async function Dashboard() {
         />
       </div>
 
-      <div className="mt-5">
-        <SubHeading title="Tasks" desc="Earn real cash for completing task." />
-      </div>
+      {!user.isAdmin && (
+        <>
+          <div className="mt-5">
+            <SubHeading
+              title="Tasks"
+              desc="Earn real cash for completing task."
+            />
+          </div>
 
-      <div className="bg-[var(--gray-01)] h-[250px] p-5 my-5 rounded">
-        <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar">
-          {filterUserTask.length > 0 ? (
-            filterUserTask.map(
-              (task: {
-                _id: any;
-                level: any;
-                media: any;
-                price: any;
-                socialTarget: any;
-              }) => {
-                const { _id, level, media, price, socialTarget } = task;
-                return (
-                  <TaskCard
-                    key={_id}
-                    userTask={{ _id, level, media, price, socialTarget }}
-                  />
-                );
-              }
-            )
-          ) : (
-            <p className="flex items-center justify-center h-full">
-              Opps.. tasks unavailable
-            </p>
-          )}
-        </div>
-      </div>
-    </>
+          <div className="bg-[var(--gray-01)] h-[250px] p-5 my-5 rounded">
+            <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar">
+              {filterUserTask.length > 0 ? (
+                filterUserTask.map(
+                  (task: {
+                    _id: any;
+                    level: any;
+                    media: any;
+                    price: any;
+                    socialTarget: any;
+                  }) => {
+                    const { _id, level, media, price, socialTarget } = task;
+                    return (
+                      <TaskCard
+                        key={_id}
+                        userTask={{ _id, level, media, price, socialTarget }}
+                      />
+                    );
+                  }
+                )
+              ) : (
+                <p className="flex items-center justify-center h-full">
+                  Opps.. tasks unavailable
+                </p>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 }

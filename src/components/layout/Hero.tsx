@@ -28,11 +28,10 @@ export default function Hero() {
       <div className="relative">
         <Image
           src={heroImage}
-          width={500}
-          height={500}
+          width={400}
+          height={400}
           alt="hero image"
           className="mx-auto md:float-end"
-          style={{ width: "auto", height: "auto" }}
         />
         <div className="w-[150px] h-[150px] absolute top-0 left-0 md:bottom-0  -z-10 rounded-[220px] blur-[30px] bg-[#29cd9c4d]"></div>
       </div>

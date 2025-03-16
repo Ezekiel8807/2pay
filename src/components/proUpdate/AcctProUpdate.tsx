@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import ProUpdateForm from "../ProUpdateForm";
 
 type AcctProUpdateProbs = {
@@ -9,39 +11,44 @@ type AcctProUpdateProbs = {
 };
 
 export default function AcctProUpdate({ userAcctData }: AcctProUpdateProbs) {
+  const [bankName, setBankName] = useState(userAcctData.bankName);
+  const [bankAcctNo, setBankAcctNo] = useState(userAcctData.bankAcctNo);
   return (
     <ProUpdateForm title="Account Information">
       <div className="flex flex-col md:flex-row mb-5 md:justify-between">
-        <label htmlFor="firstname">Acct Name: </label>
+        <label htmlFor="acctName">Acct Name: </label>
         <input
           className="w-full md:w-[70%] outline-none bg-none p-1 border-b-2 text-right"
           type="text"
           value={userAcctData.fullname}
           readOnly
-          name="firstname"
-          id="firstname"
+          name="acctName"
+          id="acctName"
         />
       </div>
 
       <div className="flex flex-col md:flex-row mb-5 md:justify-between">
-        <label htmlFor="username">Bank Name: </label>
+        <label htmlFor="bankName">Bank Name: </label>
         <input
           className="w-full md:w-[70%] outline-none bg-none p-1 border-b-2 text-right"
           type="text"
-          value={userAcctData.bankName}
-          name="username"
-          id="username"
+          value={bankName}
+          name="bankName"
+          id="bankName"
+          onChange={(e) => setBankName(e.target.value)}
         />
       </div>
 
       <div className="flex flex-col md:flex-row mb-5 md:justify-between">
-        <label htmlFor="lastname">Acct NO: </label>
+        <label htmlFor="bankAcctNo">Acct NO: </label>
         <input
           className="w-full md:w-[70%] outline-none bg-none p-1 border-b-2 text-right"
-          type="text"
-          value={userAcctData.bankAcctNo}
-          name="lastname"
-          id="lastname"
+          type="number"
+          value={bankAcctNo}
+          name="bankAcctNo"
+          id="bankAcctNo"
+          maxLength={10}
+          onChange={(e) => setBankAcctNo(+e.target.value)}
         />
       </div>
     </ProUpdateForm>

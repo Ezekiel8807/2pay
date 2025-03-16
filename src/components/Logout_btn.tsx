@@ -1,5 +1,6 @@
 "use client";
 import { redirect } from "next/navigation";
+// import { logout } from "@/actions/action";
 
 // components
 import Button from "./Button";
@@ -8,15 +9,20 @@ type Logout_btnProbs = {
   logoutBtnStyle: string;
 };
 
-export default function Logout_btn({ logoutBtnStyle }: Logout_btnProbs) {
-  //Logout function
-  const logout = async () => {
-    const res = await fetch("/api/auth/logout");
-    if (res.redirected) {
-      redirect(res.url);
-    }
-  };
+// async function handleLogout() {
+//   await logout();
+//   redirect("/login");
+// }
 
+//Logout function
+async function logout() {
+  const res = await fetch("/api/auth/logout");
+  if (res.redirected) {
+    redirect(res.url);
+  }
+}
+
+export default function Logout_btn({ logoutBtnStyle }: Logout_btnProbs) {
   return (
     <Button disabled={false} btnAction={logout} btnStyle={logoutBtnStyle}>
       Logout

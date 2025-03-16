@@ -16,20 +16,16 @@
 
 :root {
   --green: #29cd9c;
-  --green-trans: #29cd9c77;
-  --gray-05: #f2f2f2;
   --black: black;
-  --blue-dark: #035670;
   --white: white;
-  --tan-light: #faf2e3;
   --gray-01: #f8f8f8;
-  --gray-50: grey;
+  --gray-05: #f2f2f2;
   --gray-10: #e6e6e6;
-  --tan: #f5e6c7;
-  --blue: #3da9d8;
-  --blue-light: #a0d3f0;
-  --gray-80: #333;
   --gray-20: #ccc;
+  --gray-50: grey;
+  --gray-80: #333;
+  --green-trans: #29cd9c77;
+  --black-trans: #00000050;
 }
 
 * {

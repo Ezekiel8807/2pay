@@ -1,3 +1,4 @@
+import { use } from "react";
 import Link from "next/link";
 import { getToken } from "@/actions/action";
 import User from "../../model/userModel";
@@ -12,14 +13,26 @@ import NavProfile from "../NavProfile";
 // Fetch user data on the server
 async function getUser() {
   const token = await getToken();
-  if (!token?.id) return undefined;
+  if (!token) return null;
 
+  //connect to database
   await connectDB();
-  return await User.findOne({ _id: token.id }).select("username rank");
+
+  //fetch user
+  const user = await User.findOne({ _id: token.id }).select(
+    "username rank isAdmin"
+  );
+  if (!user) return null;
+
+  // respond
+  return JSON.parse(JSON.stringify(user));
 }
 
-export default async function Header() {
-  const user = await getUser();
+export default function Header() {
+  const user = use(getUser());
+  const isLogin = !user ? false : true;
+  const isAdmin = !user ? false : user.isAdmin;
+  //
 
   return (
     <header className="p-5">
@@ -42,7 +55,7 @@ export default async function Header() {
         )}
 
         {/* Toggle Button */}
-        <ToggleBtn token={user ? true : undefined} />
+        <ToggleBtn toggleData={{ isLogin, isAdmin }} />
       </div>
     </header>
   );

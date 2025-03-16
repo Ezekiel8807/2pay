@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { redirect } from "next/navigation";
 
 // components
-import AuthForm from "@/components/AuthForm";
 import Button from "@/components/Button";
-import FormError from "@/components/errorCom/Error";
-import { redirect } from "next/navigation";
+import AuthForm from "@/components/AuthForm";
+import FormError from "@/components/errorCom/FormError";
 
 export default function Register() {
   const [err, setErr] = useState("");

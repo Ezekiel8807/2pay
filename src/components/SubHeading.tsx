@@ -8,8 +8,10 @@ type SubHeadingPProbs = {
 export default function SubHeading({ title, desc }: SubHeadingPProbs) {
   return (
     <>
-      <h1 className="font-black text-[20px]">{title}</h1>
-      <p className="text-[12px]">{desc}</p>
+      <h1 className="font-black text-[20px] sm:text-[25px] md:text-[30px]">
+        {title}
+      </h1>
+      <p className="text-[10px] sm:text-[12px] md:text-[14px]">{desc}</p>
     </>
   );
 }

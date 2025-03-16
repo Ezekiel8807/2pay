@@ -1,31 +1,39 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 // components
 import Logout_btn from "./Logout_btn";
 
-const deskLinks = [
-  "Dashboard",
-  "Profile",
-  "Account",
-  "Transactions",
-  "Upgrade",
-];
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export default function SideNav({ token }: { token: any }) {
-  const [isLogin, setIsLogin] = useState<boolean>(Boolean(token));
-  const [username, setUsername] = useState("Username");
-
-  useEffect(() => {
-    if (token != undefined) {
-      setIsLogin(Boolean(token));
-      setUsername(token.username as string);
-    }
-  }, [token]);
-
+type SideNavProbs = {
+  sideNavInfo: {
+    username: string;
+    isAdmin: boolean;
+    isLogin: boolean;
+  };
+};
+export default function SideNav({ sideNavInfo }: SideNavProbs) {
+  const deskLinks = [
+    { label: "Dashboard", href: "/dasboard", show: sideNavInfo.isLogin },
+    {
+      label: "Users",
+      href: "/users",
+      show: sideNavInfo.isLogin && sideNavInfo.isAdmin,
+    },
+    {
+      label: "Tasks",
+      href: "/tasks",
+      show: sideNavInfo.isLogin && sideNavInfo.isAdmin,
+    },
+    {
+      label: "Request",
+      href: "/requests",
+      show: sideNavInfo.isLogin && sideNavInfo.isAdmin,
+    },
+    { label: "Profile", href: "/profile", show: sideNavInfo.isLogin },
+    { label: "Account", href: "/account", show: sideNavInfo.isLogin },
+    { label: "Transactions", href: "/transactions", show: sideNavInfo.isLogin },
+    { label: "Upgrade", href: "/upgrade", show: sideNavInfo.isLogin },
+  ];
   return (
     <div className="w-[250px] bg-[var(--green)] p-5 my-5 md:my-10 rounded mx-auto shadow-md">
       <div className="w-[100px] h-[100px] bg-[var(--blue-dark)] shadow-md rounded-full m-auto">
@@ -36,27 +44,23 @@ export default function SideNav({ token }: { token: any }) {
           alt="Sde nav pro-photo"
         />
       </div>
-      <div className="text-center">
-        <span className="font-black mt-2 block text-[var(--white)]">
-          Rank: Brass
-        </span>
-        <h1 className="font-black text-[30px]">{username}</h1>
-      </div>
-
+      <h1 className="font-black text-center text-white text-[30px]">
+        {sideNavInfo.username}
+      </h1>
       <nav className="">
-        {deskLinks.map((link) => (
-          <Link
-            className="font-black block p-3 hover:text-[var(--white)]"
-            key={link}
-            href={`/${link.toLowerCase()}`}
-          >
-            {link}
-          </Link>
-        ))}
-
-        {isLogin && (
-          <Logout_btn logoutBtnStyle="font-black block p-3 hover:text-[var(--white)]" />
+        {deskLinks.map(
+          (item) =>
+            item.show && (
+              <Link
+                key={item.href}
+                className="font-black block p-3 hover:text-[var(--white)]"
+                href={item.href}
+              >
+                {item.label}
+              </Link>
+            )
         )}
+        <Logout_btn logoutBtnStyle="font-black block p-3 hover:text-[var(--white)]" />
       </nav>
     </div>
   );

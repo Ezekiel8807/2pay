@@ -34,7 +34,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/", "/admin/", "/tasks/"],
-  // matcher: "/((?!login|register).*)",
-  // matcher: ["/((?!api/auth/login|api/auth/register).*)"],
+  matcher: ["/app((?!register|forget|api|login).*)"],
 };

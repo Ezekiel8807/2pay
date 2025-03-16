@@ -13,7 +13,9 @@ export default function ProUpdateForm({ children, title }: ProUpdateFormProbs) {
       <form method="POST">
         {children}
 
-        <Button btnStyle="float-end">Update</Button>
+        <Button btnStyle="w-[100px] font-bold float-end p-2 text-[var(--white)] bg-[var(--green)]">
+          Update
+        </Button>
       </form>
     </div>
   );

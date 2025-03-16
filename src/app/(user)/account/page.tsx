@@ -31,32 +31,38 @@ export default async function Account() {
     return redirect("/login");
   }
 
+  const { firstname, lastname, rank } = user;
+  const { bankName, bankAcctNo } = user.account.withdrawer;
+  const acctName = `${lastname} ${firstname}`;
+
   return (
-    <div>
+    <div className="w-[100%] sm:w-[90%]  m-auto">
       <SubHeading title="Account" desc="Everything about your account." />
 
       <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar  my-3">
         <div className="w-[275px] h-[130px] md:w-[300px]">
           <AcctBalCom
-            firstName={user.firstname}
-            lastName={user.lastname}
-            userRank={user.rank}
+            firstName={firstname}
+            lastName={lastname}
+            userRank={rank}
             userBalance={parseInt(user.account?.balance) || 0}
           />
         </div>
 
-        <BankInfo />
+        <BankInfo BankInfo={{ acctName, bankName, bankAcctNo }} />
       </div>
 
+      {/* auto scroll element */}
       <div className="scroll-smooth"></div>
 
-      <div className="flex flex-col md:flex-row">
-        <div>
-          <SubHeading
-            title="Transaction"
-            desc="Transaction history right here."
-          />
-          <div className="w-[100%] h-[200px] py-3 overflow-y-scroll">
+      <div className="w-full m-auto">
+        <SubHeading
+          title="Transaction"
+          desc="Transaction history right here."
+        />
+
+        <div className="flex flex-col md:flex-row my-3">
+          <div className="w-full h-[300px] py-3 overflow-y-scroll">
             <TransCard />
             <TransCard />
             <TransCard />
