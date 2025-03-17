@@ -9,6 +9,7 @@ import SubHeading from "@/components/SubHeading";
 import AcctBalCom from "@/components/AcctBalCom";
 import Performance from "@/components/Performance";
 import TaskCard from "@/components/TaskCard";
+import Main from "@/components/layout/Main";
 
 // Fetch user data on the server
 async function getUser() {
@@ -38,22 +39,22 @@ export default async function Dashboard() {
   );
 
   return (
-    <div className="w-[100%] sm:w-[90%]  m-auto">
-      <div className="flex flex-col sm:flex-row items-center justify-end gap-5">
-        <AcctBalCom
-          firstName={user.firstname}
-          lastName={user.lastname}
-          userRank={user.rank}
-          userBalance={parseInt(user.account?.balance) || 0}
-        />
-        <Performance
-          Overall={user.overallTask}
-          Completed={user.completedTask}
-        />
-      </div>
-
+    <Main>
       {!user.isAdmin && (
         <>
+          <div className="flex flex-col sm:flex-row items-center justify-end gap-5">
+            <AcctBalCom
+              firstName={user.firstname}
+              lastName={user.lastname}
+              userRank={user.rank}
+              userBalance={parseInt(user.account?.balance) || 0}
+            />
+            <Performance
+              Overall={user.overallTask}
+              Completed={user.completedTask}
+            />
+          </div>
+
           <div className="mt-5">
             <SubHeading
               title="Tasks"
@@ -90,6 +91,15 @@ export default async function Dashboard() {
           </div>
         </>
       )}
-    </div>
+
+      <div className="">
+        <div className="mt-5">
+          <SubHeading
+            title="Submitted Tasks"
+            desc="All tasks submitted at a go."
+          />
+        </div>
+      </div>
+    </Main>
   );
 }

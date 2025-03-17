@@ -3,7 +3,7 @@ import User from "../../../../model/userModel";
 import { connectDB } from "../../../../lib/mongodb";
 import { NextResponse } from "next/server";
 
-//task data model
+//get a user
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ userName: string }> }
@@ -31,5 +31,61 @@ export async function GET(
   } catch (err) {
     //respond with data
     return NextResponse.json({ error: err }, { status: 500 });
+  }
+}
+
+//update user
+export async function PATCH(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const updateType = searchParams.get("updateType");
+
+  console.log(updateType);
+
+  // Ensure DB connection
+  await connectDB();
+
+  try {
+    const data = await req.json();
+    const { username } = data;
+
+    if (updateType == "personal") {
+      const perUp = await User.findOneAndUpdate(
+        { username },
+        { $set: { ...data } },
+        { new: true }
+      );
+
+      if (!perUp) {
+        return NextResponse.json(
+          { error: "Error updating user" },
+          { status: 400 }
+        );
+      }
+    } else if (updateType == "account") {
+      const accUp = await User.findOneAndUpdate(
+        { username },
+        {
+          $set: {
+            "account.withdrawer.bankName": data.bankName,
+            "account.withdrawer.bankAcctNo": data.bankAcctNo,
+          },
+        },
+        { new: true }
+      );
+
+      if (!accUp) {
+        return NextResponse.json(
+          { error: "Error updating user" },
+          { status: 400 }
+        );
+      }
+    }
+
+    return NextResponse.json(
+      { success: "Profile updated successfully!" },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json({ error: `Error: ${err}` }, { status: 500 });
   }
 }

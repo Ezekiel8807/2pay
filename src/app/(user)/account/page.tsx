@@ -8,6 +8,7 @@ import BankInfo from "@/components/BankInfo";
 import TransCard from "@/components/TransCard";
 import AcctBalCom from "@/components/AcctBalCom";
 import SubHeading from "@/components/SubHeading";
+import Main from "@/components/layout/Main";
 
 // Fetch user data on the server
 async function getUser() {
@@ -36,7 +37,7 @@ export default async function Account() {
   const acctName = `${lastname} ${firstname}`;
 
   return (
-    <div className="w-[100%] sm:w-[90%]  m-auto">
+    <Main>
       <SubHeading title="Account" desc="Everything about your account." />
 
       <div className="grid grid-flow-col justify-start gap-5 overflow-x-scroll no-scrollbar  my-3">
@@ -71,6 +72,6 @@ export default async function Account() {
           </div>
         </div>
       </div>
-    </div>
+    </Main>
   );
 }

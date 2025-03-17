@@ -10,6 +10,7 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import PersonalProUpdate from "@/components/proUpdate/PersonalProUpdate";
 import AcctProUpdate from "@/components/proUpdate/AcctProUpdate";
+import Main from "@/components/layout/Main";
 
 // Fetch user data on the server
 async function getUser() {
@@ -38,7 +39,7 @@ export default async function Profile() {
   const fullname = `${lastname} ${firstname}`;
 
   return (
-    <div className="w-[100%] sm:w-[90%]  m-auto">
+    <Main>
       <SubHeading title="Profile" desc="Everything about you." />
       <div className="flex mb-5 justify-end ">
         <div className="flex items-center gap-2">
@@ -63,7 +64,9 @@ export default async function Profile() {
         <PersonalProUpdate
           userpersonalData={{ firstname, lastname, username, email }}
         />
-        <AcctProUpdate userAcctData={{ fullname, bankName, bankAcctNo }} />
+        <AcctProUpdate
+          userAcctData={{ fullname, username, bankName, bankAcctNo }}
+        />
       </div>
 
       <div className="w-full my-5 p-5 bg-[var(--green)] rounded-lg">
@@ -113,6 +116,6 @@ export default async function Profile() {
       <Button btnStyle="w-full font-black block p-3 text-center bg-red-600 text-white mb-5 ">
         Delete account
       </Button>
-    </div>
+    </Main>
   );
 }

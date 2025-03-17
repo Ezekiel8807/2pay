@@ -5,6 +5,7 @@ import ProUpdateForm from "../ProUpdateForm";
 type AcctProUpdateProbs = {
   userAcctData: {
     fullname: string;
+    username: string;
     bankName: string;
     bankAcctNo: number;
   };
@@ -13,8 +14,29 @@ type AcctProUpdateProbs = {
 export default function AcctProUpdate({ userAcctData }: AcctProUpdateProbs) {
   const [bankName, setBankName] = useState(userAcctData.bankName);
   const [bankAcctNo, setBankAcctNo] = useState(userAcctData.bankAcctNo);
+
+  async function handleAccProUp(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const response = await fetch(
+      `/api/users/${userAcctData.username}?updateType=account`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bankName,
+          bankAcctNo,
+          username: userAcctData.username,
+        }),
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
+  }
+
   return (
-    <ProUpdateForm title="Account Information">
+    <ProUpdateForm handleForm={handleAccProUp} title="Account Information">
       <div className="flex flex-col md:flex-row mb-5 md:justify-between">
         <label htmlFor="acctName">Acct Name: </label>
         <input

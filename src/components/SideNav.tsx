@@ -13,7 +13,7 @@ type SideNavProbs = {
 };
 export default function SideNav({ sideNavInfo }: SideNavProbs) {
   const deskLinks = [
-    { label: "Dashboard", href: "/dasboard", show: sideNavInfo.isLogin },
+    { label: "Dashboard", href: "/dashboard", show: sideNavInfo.isLogin },
     {
       label: "Users",
       href: "/users",
@@ -47,7 +47,7 @@ export default function SideNav({ sideNavInfo }: SideNavProbs) {
       <h1 className="font-black text-center text-white text-[30px]">
         {sideNavInfo.username}
       </h1>
-      <nav className="">
+      <nav className="h-[300px] overflow-y-scroll">
         {deskLinks.map(
           (item) =>
             item.show && (
